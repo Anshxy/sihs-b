@@ -1,20 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import HomeScreen from './Screens/HomeScreen';
+import NewsScreen from './Screens/NewsScreen';
+import EventScreen from './Screens/EventInfoScreen';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import  MaterialCommunityIcons  from 'react-native-vector-icons/MaterialCommunityIcons';
+import Task from './components/Events'
 
-export default function App() {
+
+
+export default App = () => {
+  const Tab = createMaterialBottomTabNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+    <Tab.Navigator labeled={true} barStyle={{ backgroundColor: '#55BCF6' }} 
+activeColor="white" >
+      <Tab.Screen name="Home" component={HomeScreen}    
+      
+      options={{
+
+        tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26}/>
+
+        ),
+        title: 'Home',
+    }}/>
+      <Tab.Screen name="Events" component={EventScreen}     
+    
+      options={{
+        tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="calendar-star" color={color} size={26}/>
+        ),
+        
+    }}/>
+      <Tab.Screen name="News" component={NewsScreen}   // Profile Screen
+      options={{
+        tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="newspaper-variant-outline" color={color} 
+size={26}/>
+        ),
+    }}/>
+    </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
